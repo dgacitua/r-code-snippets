@@ -121,7 +121,7 @@ model.svm2 <- c()
 run.svm2 <- TRUE
 
 if (run.svm2) {
-  model.svm2$grid <-  expand.grid(C = 2^seq(-4, 10, 1), sigma = 10^seq(-5, 5, 1))
+  model.svm2$grid <- expand.grid(C = 2^seq(-4, 10, 1), sigma = 10^seq(-5, 5, 1))
   model.svm2$clsf <- train(class ~ ., data = ds, method = "svmRadial", trControl = ds.cv, tuneGrid = model.svm2$grid)
   model.svm2$data <- model.svm2$clsf$pred %>% arrange(rowIndex) %>% pull(pred)
   model.svm2$conf <- confusionMatrix(model.svm2$data, ds$class, positive = "B")
@@ -135,7 +135,7 @@ model.nn <- c()
 run.nn <- TRUE
 
 if (run.nn) {
-  model.nn$grid <-  expand.grid(decay = c(0.5, 0.1), size = c(5, 6, 7))
+  model.nn$grid <- expand.grid(decay = c(0.5, 0.1), size = c(5, 6, 7))
   model.nn$clsf <- train(class ~ ., data = ds, method = "nnet", trControl = ds.cv, tuneGrid = model.nn$grid)
   model.nn$data <- model.nn$clsf$pred %>% arrange(rowIndex) %>% pull(pred)
   model.nn$conf <- confusionMatrix(model.nn$data, ds$class, positive = "B")
